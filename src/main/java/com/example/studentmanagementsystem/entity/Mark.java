@@ -1,7 +1,6 @@
 package com.example.studentmanagementsystem.entity;
 
 import java.util.Date;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author Hingbong
@@ -14,7 +13,6 @@ public class Mark {
   private Double baseScore;
   private Double testScore;
   private Double finalScore;
-  @DateTimeFormat()
   private Date addDate;
   private String note;
 

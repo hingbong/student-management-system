@@ -1,13 +1,11 @@
 package com.example.studentmanagementsystem;
 
 import com.example.studentmanagementsystem.mappers.StudentMapper;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
-
-import java.util.List;
 
 @SpringBootTest
 class StudentManagementSystemApplicationTests {

@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.studentmanagementsystem.mappers.MarkMapper">
 
-    <insert id="addNewMark">
-        INSERT INTO Stu_mark_info (stuid, course_name, base_score, test_score, final_score, add_date, note)
-        VALUES (#{stuId}, #{courseName}, #{baseScore}, #{testScore}, #{finalScore}, #{addDate}, #{note})
-    </insert>
+  <insert id="addNewMark">
+    INSERT INTO Stu_mark_info (stuid, course_name, base_score, test_score, final_score, add_date,
+                               note)
+    VALUES (#{stuId}, #{courseName}, #{baseScore}, #{testScore}, #{finalScore}, #{addDate}, #{note})
+  </insert>
 
-    <select id="getTotalFinalScoreById" resultType="Double">
-        SELECT SUM(final_score)
-        FROM Stu_mark_info
-        WHERE stuid = #{stuId}
-    </select>
+  <select id="getTotalFinalScoreById" resultType="Double">
+    SELECT SUM(final_score)
+    FROM Stu_mark_info
+    WHERE stuid = #{stuId}
+  </select>
 
-    <select id="findAll" resultType="com.example.studentmanagementsystem.entity.vo.MarkVO">
-        SELECT Stu_mark_info.markid markId,
-        Stu_mark_info.stuid stuId,
-        Stu_mark_info.course_name courseName,
-        Stu_mark_info.base_score baseScore,
-        Stu_mark_info.test_score testScore,
-        Stu_mark_info.final_score finalScore,
-        Stu_mark_info.add_date addDate,
-        Stu_mark_info.note,
-        student_Info.stuname stuName
-        FROM Stu_mark_info
-        JOIN student_Info ON student_Info.stuid = Stu_mark_info.stuid
-        <if test="addDate!=null || stuName!=null">
-            WHERE
-            <if test="stuName!=null">
-                stuname LIKE "%"#{stuName}"%"
-            </if>
-            <if test="stuName!=null &amp;&amp; addDate!=null">
-                AND
-            </if>
-            <if test="addDate!=null">
-                add_date = #{addDate}
-            </if>
-        </if>
-    </select>
+  <select id="findAll" resultType="com.example.studentmanagementsystem.entity.vo.MarkVO">
+    SELECT Stu_mark_info.markid markId,
+    Stu_mark_info.stuid stuId,
+    Stu_mark_info.course_name courseName,
+    Stu_mark_info.base_score baseScore,
+    Stu_mark_info.test_score testScore,
+    Stu_mark_info.final_score finalScore,
+    Stu_mark_info.add_date addDate,
+    Stu_mark_info.note,
+    student_Info.stuname stuName
+    FROM Stu_mark_info
+    JOIN student_Info ON student_Info.stuid = Stu_mark_info.stuid
+    <if test="addDate!=null || stuName!=null">
+      WHERE
+      <if test="stuName!=null">
+        stuname LIKE "%"#{stuName}"%"
+      </if>
+      <if test="stuName!=null &amp;&amp; addDate!=null">
+        AND
+      </if>
+      <if test="addDate!=null">
+        add_date = #{addDate}
+      </if>
+    </if>
+  </select>
 </mapper>

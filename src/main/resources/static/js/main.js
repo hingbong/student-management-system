@@ -29,12 +29,13 @@ const getQueryStringParameters = () => {
     url = window.location.href;
     query = window.location.search.substring(1);
     return (/^[?#]/.test(query) ? query.slice(1) : query)
-        .split('&')
-        .reduce((params, param) => {
-            let [key, value] = param.split('=');
-            params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
-            return params;
-        }, {});
+    .split('&')
+    .reduce((params, param) => {
+        let [key, value] = param.split('=');
+        params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' '))
+            : '';
+        return params;
+    }, {});
 };
 
 const parseAge = identityCard => {
@@ -42,15 +43,18 @@ const parseAge = identityCard => {
     let strBirthday = "";
     //处理18位的身份证号码从号码中得到生日和性别代码
     if (len === 18) {
-        strBirthday = identityCard.substr(6, 4) + "/" + identityCard.substr(10, 2) + "/" + identityCard.substr(12, 2);
+        strBirthday = identityCard.substr(6, 4) + "/" + identityCard.substr(10,
+            2) + "/" + identityCard.substr(12, 2);
     }
     if (len === 15) {
         let birthdayValue;
         birthdayValue = identityCard.charAt(6) + identityCard.charAt(7);
         if (parseInt(birthdayValue) < 10) {
-            strBirthday = "20" + identityCard.substr(6, 2) + "/" + identityCard.substr(8, 2) + "/" + identityCard.substr(10, 2);
+            strBirthday = "20" + identityCard.substr(6, 2) + "/"
+                + identityCard.substr(8, 2) + "/" + identityCard.substr(10, 2);
         } else {
-            strBirthday = "19" + identityCard.substr(6, 2) + "/" + identityCard.substr(8, 2) + "/" + identityCard.substr(10, 2);
+            strBirthday = "19" + identityCard.substr(6, 2) + "/"
+                + identityCard.substr(8, 2) + "/" + identityCard.substr(10, 2);
         }
 
     }
@@ -59,7 +63,9 @@ const parseAge = identityCard => {
     const nowDateTime = new Date();
     let age = nowDateTime.getFullYear() - birthDate.getFullYear();
     //再考虑月、天的因素;.getMonth()获取的是从0开始的，这里进行比较，不需要加1
-    if (nowDateTime.getMonth() < birthDate.getMonth() || (nowDateTime.getMonth() === birthDate.getMonth() && nowDateTime.getDate() < birthDate.getDate())) {
+    if (nowDateTime.getMonth() < birthDate.getMonth() || (nowDateTime.getMonth()
+        === birthDate.getMonth() && nowDateTime.getDate()
+        < birthDate.getDate())) {
         age--;
     }
     return age;
