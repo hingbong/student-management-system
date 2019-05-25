@@ -6,13 +6,15 @@ import com.example.studentmanagementsystem.exception.OperationException;
 import com.example.studentmanagementsystem.mappers.MarkMapper;
 import com.example.studentmanagementsystem.mappers.StudentMapper;
 import com.example.studentmanagementsystem.services.MarkService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+/**
+ * @author Hingbong
+ */
 @Service
 public class MarkServiceImpl implements MarkService {
 

@@ -1,9 +1,8 @@
 package com.example.studentmanagementsystem.web.controller;
 
 import com.example.studentmanagementsystem.exception.OperationException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-
 import java.util.HashMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /** @author Hingbong */
 public abstract class BaseController {

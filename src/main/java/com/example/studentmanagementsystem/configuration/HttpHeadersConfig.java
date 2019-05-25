@@ -1,11 +1,10 @@
 package com.example.studentmanagementsystem.configuration;
 
+import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-
-import java.util.List;
 
 /** @author Hingbong */
 @Configuration

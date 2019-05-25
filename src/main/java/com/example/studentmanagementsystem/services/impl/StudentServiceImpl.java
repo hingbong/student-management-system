@@ -5,10 +5,9 @@ import com.example.studentmanagementsystem.exception.OperationException;
 import com.example.studentmanagementsystem.mappers.StudentMapper;
 import com.example.studentmanagementsystem.services.StudentService;
 import com.example.studentmanagementsystem.util.Util;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /** @author Hingbong */
 @Service
@@ -46,12 +45,14 @@ public class StudentServiceImpl implements StudentService {
   }
 
   @Override
-  public Boolean deleteStudentById(Integer stuId) {
+  public void deleteStudentById(Integer stuId) {
     if (stuId == null) {
-      return false;
+      throw new OperationException("操作错误");
     }
     Integer integer = studentMapper.deleteStudentById(stuId);
-    return integer != null && integer > 0;
+    if (integer == null || integer <= 0) {
+      throw new OperationException("操作错误");
+    }
   }
 
   @Override

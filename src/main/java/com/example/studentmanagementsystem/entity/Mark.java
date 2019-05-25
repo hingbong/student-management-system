@@ -1,9 +1,11 @@
 package com.example.studentmanagementsystem.entity;
 
+import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-
+/**
+ * @author Hingbong
+ */
 public class Mark {
 
   private Integer markId;

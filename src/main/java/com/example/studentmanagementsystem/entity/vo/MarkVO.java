@@ -2,6 +2,9 @@ package com.example.studentmanagementsystem.entity.vo;
 
 import java.util.Date;
 
+/**
+ * @author Hingbong
+ */
 public class MarkVO {
 
   private Integer markId;

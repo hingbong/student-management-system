@@ -1,11 +1,14 @@
 package com.example.studentmanagementsystem.mappers;
 
 import com.example.studentmanagementsystem.entity.Student;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /** @author Hingbong */
+@Mapper
+@Repository
 public interface StudentMapper {
 
   /**
@@ -42,9 +45,27 @@ public interface StudentMapper {
    */
   Integer modifyStudent(Student student);
 
+  /**
+   * find student by id
+   *
+   * @param stuId student id
+   * @return student
+   */
   Student findStudentById(Integer stuId);
 
+  /**
+   * get all student id
+   *
+   * @return all student id
+   */
   List<Integer> findAllStuId();
 
+  /**
+   * when get score set the total score
+   *
+   * @param stuId student
+   * @param totalScore total score
+   * @return rows affected
+   */
   Integer setTotalScoreById(@Param("stuId") Integer stuId, @Param("totalScore") Integer totalScore);
 }
