@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有学生信息</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+</head>
+
+<body>
+<article class="container-fluid page-box">
+    <form>
+        <a href="new_student.html">添加学生入口</a>
+        <label for="stuName">学生姓名</label><input id="stuName" name="stuName" type="text">
+        <label for="profession">专业</label><select id="profession" name="profession">
+        <option></option>
+        <option value="1">计算机控制</option>
+        <option value="2">网络安全</option>
+        <option value="3">计算机应用</option>
+    </select>
+        <button class="btn btn-primary" onclick="search();return false;">提交</button>
+        <button class="btn btn-primary" onclick="getAll();return false;">重置</button>
+    </form>
+    <table class="table" id="students_info">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">学号</th>
+            <th scope="col">姓名</th>
+            <th scope="col">性别</th>
+            <th scope="col">入学日期</th>
+            <th scope="col">年龄</th>
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</article>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+<script>
+    $(() => getAll());
+    const getAll = () => $.post('list_all.do', data => putData(data));
+
+    const search = () => $.post('list_all.do', $('form').serialize(), data => putData(data));
+
+    const putData = e => {
+        $('#students_info').children('tbody').html("");
+        let index = 0;
+        e.forEach(ele => {
+            let number = $(`<th scope="row">${++index}</th>`);
+            let stuId = $(`<td>${ele.stuId}</td>`);
+            let stuName = $(`<td>${ele.stuName}</td>`);
+            let sex = $(`<td>${sexArr[ele.sex]}</td>`);
+            let date = $(`<td>${ele.date}</td>`);
+            let age = $(`<td>${parseAge(ele.idNum)}</td>`);
+            let student = $(`<tr id="s${ele.stuId}"></tr>`);
+            let op = $(`<td><div class="btn-group btn-group-sm" role="group"><a onclick="confirm_delete(${ele.stuId})" class="btn btn-secondary">删除</a><a href="modify_student.html?stuId=${ele.stuId}" class="btn btn-secondary">编辑</a></div></td>`);
+            student.append(number);
+            student.append(stuId);
+            student.append(stuName);
+            student.append(sex);
+            student.append(date);
+            student.append(age);
+            student.append(op);
+            $('#students_info').children('tbody').append(student);
+        })
+    };
+</script>
+</body>
+</html>

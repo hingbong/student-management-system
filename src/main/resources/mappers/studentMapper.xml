@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.studentmanagementsystem.mappers.StudentMapper">
+
+    <insert id="addNewStudent">
+        INSERT INTO student_Info (stuname, profession, date, sex, id_num, total_score, note)
+        VALUES (#{stuName}, #{profession}, #{date}, #{sex}, #{idNum}, ${totalScore}, #{note})
+    </insert>
+
+    <select id="findAllStudent" resultType="com.example.studentmanagementsystem.entity.Student">
+        SELECT stuid stuId,
+        stuname stuName,
+        profession,
+        date,
+        sex,
+        id_num idNum,
+        TOTAL_SCORE totalScore,
+        note
+        FROM student_Info
+        <if test="stuName!=null || profession!=null">
+            WHERE
+            <if test="stuName!=null">
+                stuname LIKE "%"#{stuName}"%"
+            </if>
+            <if test="stuName!=null &amp;&amp; profession!=null">
+                AND
+            </if>
+            <if test="profession!=null">
+                profession = #{profession}
+            </if>
+        </if>
+    </select>
+
+    <delete id="deleteStudentById">
+        DELETE
+        FROM student_Info
+        WHERE stuid = #{stuId}
+    </delete>
+
+    <update id="modifyStudent">
+        UPDATE student_Info
+        SET stuname     = #{stuName},
+            profession  = #{profession},
+            date        = #{date},
+            sex         = #{sex},
+            id_num      = #{idNum},
+            total_score = #{totalScore},
+            note        = #{note}
+        WHERE stuid = #{stuId}
+    </update>
+
+    <select id="findStudentById" resultType="com.example.studentmanagementsystem.entity.Student">
+        SELECT stuid       stuId,
+               stuname     stuName,
+               profession,
+               date,
+               sex,
+               id_num      idNum,
+               TOTAL_SCORE totalScore,
+               note
+        FROM student_Info
+        WHERE stuid = #{stuId}
+    </select>
+
+    <select id="findAllStuId" resultType="Integer">
+        SELECT stuid
+        from student_Info
+    </select>
+
+    <update id="setTotalScoreById">
+        UPDATE student_Info
+        SET total_score = #{totalScore}
+        WHERE stuid = #{stuId}
+    </update>
+</mapper>

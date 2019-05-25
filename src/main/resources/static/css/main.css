@@ -1,0 +1,16 @@
+.page-box {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    max-width: 1000px;
+}
+
+.jumbotron {
+    padding-bottom: 32px;
+    padding-top: 32px;
+}
+
+.btn {
+    color: white !important;
+}
