@@ -11,6 +11,7 @@
 <article class="container page-box">
     <div class="jumbotron">
         <h1 class="display-4">添加学生</h1>
+        <a href="index.html">返回</a>
     </div>
     <form action="add_student.do" method="post" onsubmit="send_form(this);return false;">
         <div class="row">
@@ -40,14 +41,15 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">入学日期</span>
                 </div>
-                <input aria-label="Sizing example input" class="form-control" id="date" name="date"
+                <input aria-label="date" class="form-control ui-icon-calendar" id="date" name="date"
                        type="date">
             </div>
             <div class="input-group mb-3 col">
                 <div class="input-group-prepend">
                     <span class="input-group-text">性别</span>
                 </div>
-                <div class="form-check form-check-inline"><input class="form-check-input" id="male"
+                <div class="form-check form-check-inline"><input class="form-check-input"
+                                                                 id="male"
                                                                  name="sex"
                                                                  type="radio"
                                                                  value="0"><label
@@ -66,26 +68,17 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">身份证号</span>
                 </div>
-                <input aria-label="Sizing example input" class="form-control" id="idNum"
+                <input aria-label="idNum" class="form-control" id="idNum"
                        name="idNum"
                        type="text">
             </div>
             <div class="input-group mb-3 col">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">总学分</span>
+                    <span class="input-group-text">其他说明</span>
                 </div>
-                <input aria-label="Sizing example input" class="form-control" id="totalScore"
-                       name="totalScore" readonly
-                       type="text"
-                       value="0">
+                <input aria-label="note" class="form-control" id="note"
+                       name="note" type="text">
             </div>
-        </div>
-
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">其他说明</span>
-            </div>
-            <textarea aria-label="note" class="form-control" id="note" name="note"></textarea>
         </div>
         <div class="form_info middle" id="form_notice"></div>
         <input type="submit" value="提交">

@@ -3,15 +3,16 @@ package com.example.studentmanagementsystem.web.controller.mark;
 import com.example.studentmanagementsystem.entity.Mark;
 import com.example.studentmanagementsystem.entity.vo.MarkVO;
 import com.example.studentmanagementsystem.services.MarkService;
+import com.example.studentmanagementsystem.util.JsonResult;
 import com.example.studentmanagementsystem.web.controller.BaseController;
-import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /** @author Hingbong */
@@ -19,27 +20,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mark")
 public class MarkController extends BaseController {
 
-  private HttpHeaders httpHeaders;
   private MarkService markService;
 
   @PostMapping("/add_mark.do")
-  public ResponseEntity<HashMap> addNewMark(Mark mark) {
+  @ResponseStatus(HttpStatus.CREATED)
+  public JsonResult<Void> addNewMark(Mark mark) {
+    System.out.println(mark);
     markService.addNewMark(mark);
-    HashMap<String, String> responseMap = new HashMap<>(2);
-    responseMap.put("result", "success");
-    return new ResponseEntity<>(responseMap, httpHeaders, HttpStatus.CREATED);
+    return JsonResult.newJson(1);
   }
 
   @PostMapping("/list_all.do")
-  public ResponseEntity<List> listAll(String addDate, String stuName) {
-    System.out.println(addDate);
+  @ResponseStatus(HttpStatus.OK)
+  public JsonResult<List> listAll(String addDate, String stuName) {
     List<MarkVO> allMarkAndStuName = markService.findAllMarkAndStuName(addDate, stuName);
-    return new ResponseEntity<>(allMarkAndStuName, httpHeaders, HttpStatus.OK);
+    return JsonResult.newJson(1, allMarkAndStuName);
   }
 
-  @Autowired
-  public void setHttpHeaders(HttpHeaders httpHeaders) {
-    this.httpHeaders = httpHeaders;
+  @DeleteMapping("/delete_by_id.do")
+  public JsonResult<Void> deleteMarkById(@RequestParam("id") Integer markId) {
+    markService.deleteMark(markId);
+    return JsonResult.newJson(1);
   }
 
   @Autowired

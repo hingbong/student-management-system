@@ -39,4 +39,12 @@ public interface MarkMapper {
    * @return the result
    */
   List<MarkVO> findAll(@Param("addDate") Date addDate, @Param("stuName") String stuName);
+
+  /**
+   * delete a mark by id
+   *
+   * @param markId mark id
+   * @return rows affected
+   */
+  Integer deleteMarkById(Integer markId);
 }

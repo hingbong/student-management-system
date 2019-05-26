@@ -18,7 +18,7 @@ public interface StudentService {
    *
    * @param stuName student name
    * @param profession profession
-   * @return
+   * @return all students
    */
   List<Student> findAllStudent(String stuName, Integer profession);
 

@@ -6,7 +6,7 @@ const confirm_delete = id => {
     // alert( id );
     if (confirm("确定要删除么？")) {
         $.ajax({
-            url: 'delete_by_id.do?stuid=' + id,
+            url: 'delete_by_id.do?id=' + id,
             type: 'DELETE',
             success: () => window.location.reload()
         });
@@ -16,9 +16,9 @@ const confirm_delete = id => {
 const send_form = form => {
     $.post($(form).attr("action"), $(form).serialize(), data => {
         const notice = $("#form_notice");
-        if (data.result === 'success') {
+        if (data.code === 1) {
             notice ? notice.html('成功') : '';
-            window.location.replace('all_student.html');
+            window.location.replace('index.html');
         } else if (notice) {
             notice.html(data.result);
         }
@@ -26,8 +26,8 @@ const send_form = form => {
 };
 
 const getQueryStringParameters = () => {
-    url = window.location.href;
-    query = window.location.search.substring(1);
+    let url = window.location.href;
+    let query = window.location.search.substring(1);
     return (/^[?#]/.test(query) ? query.slice(1) : query)
     .split('&')
     .reduce((params, param) => {

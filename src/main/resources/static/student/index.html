@@ -9,19 +9,30 @@
 </head>
 
 <body>
-<article class="container-fluid page-box">
-    <form>
-        <a href="new_student.html">添加学生入口</a>
-        <label for="stuName">学生姓名</label><input id="stuName" name="stuName" type="text">
-        <label for="profession">专业</label><select id="profession" name="profession">
-        <option></option>
-        <option value="1">计算机控制</option>
-        <option value="2">网络安全</option>
-        <option value="3">计算机应用</option>
-    </select>
-        <button class="btn btn-primary" onclick="search();return false;">提交</button>
-        <button class="btn btn-primary" onclick="getAll();return false;">重置</button>
-    </form>
+<nav>
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="new_student.html">添加学生入口</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/index.html">返回首页</a>
+        </li>
+        <li class="nav-item">
+            <form>
+                <label for="stuName">学生姓名</label><input id="stuName" name="stuName" type="text">
+                <label for="profession">专业</label><select id="profession" name="profession">
+                <option></option>
+                <option value="1">计算机控制</option>
+                <option value="2">网络安全</option>
+                <option value="3">计算机应用</option>
+            </select>
+                <button class="btn btn-primary" onclick="search();return false;">提交</button>
+                <button class="btn btn-primary" onclick="getAll();return false;">重置</button>
+            </form>
+        </li>
+    </ul>
+</nav>
+<article class="container page-box">
     <table class="table" id="students_info">
         <thead class="thead-dark">
         <tr>
@@ -51,7 +62,7 @@
     const putData = e => {
         $('#students_info').children('tbody').html("");
         let index = 0;
-        e.forEach(ele => {
+        e.code === 1 ? e.result.forEach(ele => {
             let number = $(`<th scope="row">${++index}</th>`);
             let stuId = $(`<td>${ele.stuId}</td>`);
             let stuName = $(`<td>${ele.stuName}</td>`);
@@ -69,7 +80,7 @@
             student.append(age);
             student.append(op);
             $('#students_info').children('tbody').append(student);
-        })
+        }) : alert(e.result);
     };
 </script>
 </body>

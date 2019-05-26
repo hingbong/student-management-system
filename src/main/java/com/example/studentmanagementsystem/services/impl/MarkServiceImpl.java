@@ -8,6 +8,7 @@ import com.example.studentmanagementsystem.mappers.StudentMapper;
 import com.example.studentmanagementsystem.services.MarkService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,8 @@ public class MarkServiceImpl implements MarkService {
     if (!validStuId) {
       throw new OperationException("学号错误");
     }
+    // add date is now
+    mark.setAddDate(new Date());
     // calculate the final score
     mark.setFinalScore(mark.getBaseScore() * 0.4 + mark.getTestScore() * 0.6);
     Integer newMark = markMapper.addNewMark(mark);
@@ -53,10 +56,22 @@ public class MarkServiceImpl implements MarkService {
       stuName = null;
     }
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    try {
-      return markMapper.findAll(format.parse(addDate), stuName);
-    } catch (ParseException e) {
-      throw new OperationException("日期格式错误");
+    Date parse = null;
+    if (addDate != null) {
+      try {
+        parse = format.parse(addDate);
+      } catch (ParseException e) {
+        throw new OperationException("日期格式错误");
+      }
+    }
+    return markMapper.findAll(parse, stuName);
+  }
+
+  @Override
+  public void deleteMark(Integer markId) {
+    Integer deleteMarkById = markMapper.deleteMarkById(markId);
+    if (deleteMarkById < 1) {
+      throw new OperationException("删除失败");
     }
   }
 
@@ -64,8 +79,7 @@ public class MarkServiceImpl implements MarkService {
     return mark.getStuId() != null
         && mark.getCourseName() != null
         && mark.getBaseScore() != null
-        && mark.getTestScore() != null
-        && mark.getAddDate() != null;
+        && mark.getTestScore() != null;
   }
 
   @Autowired

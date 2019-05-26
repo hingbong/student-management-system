@@ -24,4 +24,11 @@ public interface MarkService {
    * @return the result
    */
   List<MarkVO> findAllMarkAndStuName(String addDate, String stuName);
+
+  /**
+   * delete mark
+   *
+   * @param markId mark id
+   */
+  void deleteMark(Integer markId);
 }

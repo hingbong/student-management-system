@@ -20,6 +20,7 @@ public class StudentServiceImpl implements StudentService {
     if (!validStudent(student)) {
       throw new OperationException("添加失败");
     }
+    student.setTotalScore(0.0);
     List<Student> all = studentMapper.findAllStudent(null, null);
     boolean hasSameIdNum =
         all.stream().map(Student::getIdNum).anyMatch(s -> s.equals(student.getIdNum()));
@@ -59,6 +60,16 @@ public class StudentServiceImpl implements StudentService {
   public void modifyStudent(Student student) {
     Boolean validStudent = validStudent(student);
     if (validStudent) {
+
+      // only profession can be modified
+      Student origin = studentMapper.findStudentById(student.getStuId());
+      student.setTotalScore(origin.getTotalScore());
+      student.setDate(origin.getDate());
+      student.setIdNum(origin.getIdNum());
+      student.setNote(origin.getNote());
+      student.setSex(origin.getSex());
+      student.setStuName(student.getStuName());
+
       Integer integer = studentMapper.modifyStudent(student);
       if (integer <= 0) {
         throw new OperationException("修改失败");
@@ -76,12 +87,12 @@ public class StudentServiceImpl implements StudentService {
   }
 
   private Boolean validStudent(Student student) {
-    return !(student.getStuName() == null
-        || student.getProfession() == null
-        || !Util.isIDNumber(student.getIdNum())
-        || student.getDate() == null
-        || student.getSex() == null
-        || student.getTotalScore() == null);
+    return student != null
+        && student.getStuName() != null
+        && student.getProfession() != null
+        && Util.isIDNumber(student.getIdNum())
+        && student.getDate() != null
+        && student.getSex() != null;
   }
 
   @Autowired

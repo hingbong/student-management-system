@@ -41,4 +41,10 @@
       </if>
     </if>
   </select>
+
+  <delete id="deleteMarkById">
+    DELETE
+    FROM stu_mark_info
+    WHERE markid = #{markid}
+  </delete>
 </mapper>

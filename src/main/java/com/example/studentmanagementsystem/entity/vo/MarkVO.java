@@ -1,11 +1,13 @@
 package com.example.studentmanagementsystem.entity.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Hingbong
  */
-public class MarkVO {
+public class MarkVO implements Serializable {
 
   private Integer markId;
   private Integer stuId;
@@ -14,7 +16,10 @@ public class MarkVO {
   private Double baseScore;
   private Double testScore;
   private Double finalScore;
+
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private Date addDate;
+
   private String note;
 
   public Integer getMarkId() {

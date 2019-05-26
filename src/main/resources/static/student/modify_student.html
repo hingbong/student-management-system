@@ -11,6 +11,7 @@
 <article class="container page-box">
     <div class="jumbotron">
         <h1 class="display-4">编辑学生信息</h1>
+        <a href="index.html">返回</a>
     </div>
     <form action="modify_student.do" method="post" onsubmit="send_form(this);return false;">
         <div class="input-group mb-3">
@@ -102,15 +103,21 @@
 <script src="/js/main.js"></script>
 <script>
     $(() => {
-        $.post(`get_student_by_id.do?stuId=${getQueryStringParameters().stuId}`, data => {
-            $('#stuId').val(data.stuId);
-            $('#stuName').val(data.stuName);
-            $('#profession').val(data.profession);
-            document.querySelector('#date').valueAsDate = new Date(data.date);
-            $('input:radio[name=sex]')[data.sex].checked = true;
-            $('#idNum').val(data.idNum);
-            $('#totalScore').val(data.totalScore);
-            $('#note').val(data.note);
+        $.post(`get_student_by_id.do?stuId=${getQueryStringParameters().stuId}`, response => {
+            const notice = $("#form_notice");
+            if (response.code === 1) {
+                const data = response.result;
+                $('#stuId').val(data.stuId);
+                $('#stuName').val(data.stuName);
+                $('#profession').val(data.profession);
+                document.querySelector('#date').valueAsDate = new Date(data.date);
+                $('input:radio[name=sex]')[data.sex].checked = true;
+                $('#idNum').val(data.idNum);
+                $('#totalScore').val(data.totalScore);
+                $('#note').val(data.note);
+            } else if (notice) {
+                notice.html(data.result);
+            }
         })
     });
 </script>

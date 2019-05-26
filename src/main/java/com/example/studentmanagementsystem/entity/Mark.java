@@ -1,11 +1,12 @@
 package com.example.studentmanagementsystem.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Hingbong
  */
-public class Mark {
+public class Mark implements Serializable {
 
   private Integer markId;
   private Integer stuId;
