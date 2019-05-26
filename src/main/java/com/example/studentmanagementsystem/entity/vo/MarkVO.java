@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author Hingbong
- */
+/** @author Hingbong */
 public class MarkVO implements Serializable {
 
   private Integer markId;

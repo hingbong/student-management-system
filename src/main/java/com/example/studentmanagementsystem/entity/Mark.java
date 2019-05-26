@@ -3,9 +3,7 @@ package com.example.studentmanagementsystem.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author Hingbong
- */
+/** @author Hingbong */
 public class Mark implements Serializable {
 
   private Integer markId;

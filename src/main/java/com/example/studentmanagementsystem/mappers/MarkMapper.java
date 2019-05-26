@@ -7,9 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-/**
- * @author Hingbong
- */
+/** @author Hingbong */
 @Mapper
 @Repository
 public interface MarkMapper {

@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>成绩信息</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <meta charset="UTF-8">
+  <title>成绩信息</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 </head>
 
 <body>
 <nav>
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" href="new_mark.html">添加成绩入口</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/index.html">返回首页</a>
-        </li>
-        <li class="nav-item">
-            <form>
-                <label for="stuName">学生姓名</label><input id="stuName" name="stuName" type="text">
-                <label for="addDate">添加日期</label><input id="addDate" name="addDate" type="date">
-                <button class="btn btn-primary" onclick="search();return false;">提交</button>
-                <button class="btn btn-primary" onclick="getAll();return false;">重置</button>
-            </form>
-        </li>
-    </ul>
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="new_mark.html">添加成绩入口</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/index.html">返回首页</a>
+    </li>
+    <li class="nav-item">
+      <form>
+        <label for="stuName">学生姓名</label><input id="stuName" name="stuName" type="text">
+        <label for="addDate">添加日期</label><input id="addDate" name="addDate" type="date">
+        <button class="btn btn-primary" onclick="search();return false;">提交</button>
+        <button class="btn btn-primary" onclick="getAll();return false;">重置</button>
+      </form>
+    </li>
+  </ul>
 </nav>
 <article class="container page-box">
-    <table class="table" id="stu_mark_info">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">成绩编号</th>
-            <th scope="col">学号</th>
-            <th scope="col">姓名</th>
-            <th scope="col">课程</th>
-            <th scope="col">平时成绩</th>
-            <th scope="col">测验成绩</th>
-            <th scope="col">最终成绩</th>
-            <th scope="col">添加时间</th>
-            <th scope="col">其他</th>
-            <th scope="col">操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+  <table class="table" id="stu_mark_info">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">成绩编号</th>
+      <th scope="col">学号</th>
+      <th scope="col">姓名</th>
+      <th scope="col">课程</th>
+      <th scope="col">平时成绩</th>
+      <th scope="col">测验成绩</th>
+      <th scope="col">最终成绩</th>
+      <th scope="col">添加时间</th>
+      <th scope="col">其他</th>
+      <th scope="col">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 </article>
 <script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/main.js"></script>
 <script>
-    $(() => getAll());
-    const getAll = () => $.post('list_all.do', data => putData(data));
+  $(() => getAll());
+  const getAll = () => $.post('list_all.do', data => putData(data));
 
-    const search = () => $.post('list_all.do', $('form').serialize(), data => putData(data));
+  const search = () => $.post('list_all.do', $('form').serialize(), data => putData(data));
 
-    const putData = e => {
-        $('#stu_mark_info').children('tbody').html("");
-        let index = 0;
-        e.code === 1 ? e.result.forEach(ele => {
-            const number = $(`<th scope="row">${++index}</th>`);
-            const markId = $(`<td>${ele.markId}</td>`);
-            const stuId = $(`<td>${ele.stuId}</td>`);
-            const stuName = $(`<td>${ele.stuName}</td>`);
-            const courseName = $(`<td>${ele.courseName}</td>`);
-            const baseScore = $(`<td>${ele.baseScore}</td>`);
-            const testScore = $(`<td>${ele.testScore}</td>`);
-            const finalScore = $(`<td>${ele.finalScore}</td>`);
-            const addDate = $(`<td>${ele.addDate.toString().substr(0, 19)}</td>`);
-            const note = $(`<td>${ele.note}</td>`);
-            const op = $(
-                `<td><div class="btn-group btn-group-sm" role="group"><a onclick="confirm_delete(${ele.markId})" class="btn btn-secondary">删除</a></div></td>`);
-            let mark = $(`<tr id="s${ele.markId}"></tr>`);
-            mark.append(number);
-            mark.append(markId);
-            mark.append(stuId);
-            mark.append(stuName);
-            mark.append(courseName);
-            mark.append(baseScore);
-            mark.append(testScore);
-            mark.append(finalScore);
-            mark.append(addDate);
-            mark.append(note);
-            mark.append(op);
-            $('#stu_mark_info').children('tbody').append(mark);
-        }) : alert(e.result);
-    };
+  const putData = e => {
+    $('#stu_mark_info').children('tbody').html("");
+    let index = 0;
+    e.code === 1 ? e.result.forEach(ele => {
+      const number = $(`<th scope="row">${++index}</th>`);
+      const markId = $(`<td>${ele.markId}</td>`);
+      const stuId = $(`<td>${ele.stuId}</td>`);
+      const stuName = $(`<td>${ele.stuName}</td>`);
+      const courseName = $(`<td>${ele.courseName}</td>`);
+      const baseScore = $(`<td>${ele.baseScore}</td>`);
+      const testScore = $(`<td>${ele.testScore}</td>`);
+      const finalScore = $(`<td>${ele.finalScore}</td>`);
+      const addDate = $(`<td>${ele.addDate.toString().substr(0, 19)}</td>`);
+      const note = $(`<td>${ele.note}</td>`);
+      const op = $(
+          `<td><div class="btn-group btn-group-sm" role="group"><a onclick="confirm_delete(${ele.markId})" class="btn btn-secondary">删除</a></div></td>`);
+      let mark = $(`<tr id="s${ele.markId}"></tr>`);
+      mark.append(number);
+      mark.append(markId);
+      mark.append(stuId);
+      mark.append(stuName);
+      mark.append(courseName);
+      mark.append(baseScore);
+      mark.append(testScore);
+      mark.append(finalScore);
+      mark.append(addDate);
+      mark.append(note);
+      mark.append(op);
+      $('#stu_mark_info').children('tbody').append(mark);
+    }) : alert(e.result);
+  };
 </script>
 </body>
 </html>

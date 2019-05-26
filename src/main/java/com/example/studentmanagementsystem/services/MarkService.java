@@ -4,9 +4,7 @@ import com.example.studentmanagementsystem.entity.Mark;
 import com.example.studentmanagementsystem.entity.vo.MarkVO;
 import java.util.List;
 
-/**
- * @author Hingbong
- */
+/** @author Hingbong */
 public interface MarkService {
 
   /**
