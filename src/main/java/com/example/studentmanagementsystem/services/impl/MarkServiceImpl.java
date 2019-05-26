@@ -6,8 +6,8 @@ import com.example.studentmanagementsystem.exception.OperationException;
 import com.example.studentmanagementsystem.mappers.MarkMapper;
 import com.example.studentmanagementsystem.mappers.StudentMapper;
 import com.example.studentmanagementsystem.services.MarkService;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,16 +55,13 @@ public class MarkServiceImpl implements MarkService {
     if ("".equals(stuName)) {
       stuName = null;
     }
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    Date parse = null;
+    String afterDay = null;
     if (addDate != null) {
-      try {
-        parse = format.parse(addDate);
-      } catch (ParseException e) {
-        throw new OperationException("日期格式错误");
-      }
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      LocalDate parse = LocalDate.parse(addDate, formatter);
+      afterDay = parse.plusDays(1).format(formatter);
     }
-    return markMapper.findAll(parse, stuName);
+    return markMapper.findAll(addDate, afterDay, stuName);
   }
 
   @Override

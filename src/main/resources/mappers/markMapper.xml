@@ -37,7 +37,7 @@
         AND
       </if>
       <if test="addDate!=null">
-        add_date = #{addDate}
+        add_date &gt;= #{addDate} AND add_date &lt; #{afterDay}
       </if>
     </if>
   </select>

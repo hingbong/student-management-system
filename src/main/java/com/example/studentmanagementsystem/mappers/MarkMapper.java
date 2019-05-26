@@ -2,7 +2,6 @@ package com.example.studentmanagementsystem.mappers;
 
 import com.example.studentmanagementsystem.entity.Mark;
 import com.example.studentmanagementsystem.entity.vo.MarkVO;
-import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -36,9 +35,13 @@ public interface MarkMapper {
    *
    * @param addDate the date of adding to the table
    * @param stuName student name
+   * @param afterDay the day after add date
    * @return the result
    */
-  List<MarkVO> findAll(@Param("addDate") Date addDate, @Param("stuName") String stuName);
+  List<MarkVO> findAll(
+      @Param("addDate") String addDate,
+      @Param("afterDay") String afterDay,
+      @Param("stuName") String stuName);
 
   /**
    * delete a mark by id
