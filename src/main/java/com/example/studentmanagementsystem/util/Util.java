@@ -5,6 +5,12 @@ import com.example.studentmanagementsystem.exception.OperationException;
 /** @author Hiongbong */
 public class Util {
 
+  /**
+   * check china mainland id number
+   *
+   * @param idNumber id number
+   * @return true if the id number is right
+   */
   public static boolean isIDNumber(String idNumber) {
     if (idNumber == null || "".equals(idNumber)) {
       throw new OperationException("身份证号有误");

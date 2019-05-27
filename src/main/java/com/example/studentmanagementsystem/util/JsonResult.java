@@ -5,7 +5,9 @@ import java.io.Serializable;
 /** @author Hingbong */
 public class JsonResult<T> implements Serializable {
 
+  /** code stand by the success status,when get 1,it success */
   private int code;
+
   private T result;
 
   private JsonResult() {}

@@ -13,11 +13,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /** @author Hingbong */
 public abstract class BaseController {
 
+  /**
+   * when visit a root directory, redirect it to index.html
+   *
+   * @param response http response
+   * @throws IOException IOException
+   */
   @RequestMapping
   public void gotoIndex(HttpServletResponse response) throws IOException {
     response.sendRedirect("index.html");
   }
 
+  /**
+   * handel the Throwable
+   *
+   * @param e Throwable
+   * @return something that error and told to the frontend
+   */
   @ExceptionHandler
   @ResponseStatus(HttpStatus.ACCEPTED)
   public JsonResult<String> handleException(final Throwable e) {
