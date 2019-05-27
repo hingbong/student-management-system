@@ -61,7 +61,7 @@
   const putData = e => {
     $('#stu_mark_info').children('tbody').html("");
     let index = 0;
-    e.code === 1 ? e.result.forEach(ele => {
+    e.code === 1 ? e.data.forEach(ele => {
       const number = $(`<th scope="row">${++index}</th>`);
       const markId = $(`<td>${ele.markId}</td>`);
       const stuId = $(`<td>${ele.stuId}</td>`);
@@ -87,7 +87,7 @@
       mark.append(note);
       mark.append(op);
       $('#stu_mark_info').children('tbody').append(mark);
-    }) : alert(e.result);
+    }) : alert(e.message);
   };
 </script>
 </body>

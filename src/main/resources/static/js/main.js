@@ -17,7 +17,7 @@ const send_form = form => {
       notice ? notice.html('成功') : '';
       window.location.replace('index.html');
     } else if (notice) {
-      notice.html(data.result);
+      notice.html(data.message);
     }
   });
 };

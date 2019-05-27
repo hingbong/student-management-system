@@ -62,7 +62,7 @@
   const putData = e => {
     $('#students_info').children('tbody').html("");
     let index = 0;
-    e.code === 1 ? e.result.forEach(ele => {
+    e.code === 1 ? e.data.forEach(ele => {
       let number = $(`<th scope="row">${++index}</th>`);
       let stuId = $(`<td>${ele.stuId}</td>`);
       let stuName = $(`<td>${ele.stuName}</td>`);
@@ -80,7 +80,7 @@
       student.append(age);
       student.append(op);
       $('#students_info').children('tbody').append(student);
-    }) : alert(e.result);
+    }) : alert(e.message);
   };
 </script>
 </body>

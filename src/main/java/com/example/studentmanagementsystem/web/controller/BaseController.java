@@ -33,19 +33,19 @@ public abstract class BaseController {
    */
   @ExceptionHandler
   @ResponseStatus(HttpStatus.ACCEPTED)
-  public JsonResult<String> handleException(final Throwable e) {
-    String result;
+  public JsonResult<Void> handleException(final Throwable e) {
+    String message;
     System.err.println(LocalDateTime.now() + "=>" + e.getMessage());
     if (e instanceof NullPointerException) {
-      result = "操作错误！尝试使用的对象为Null！";
+      message = "操作错误！尝试使用的对象为Null！";
     } else if (e instanceof OperationException) {
-      result = e.getMessage();
+      message = e.getMessage();
     } else if (e instanceof BindException) {
       // if didn't select date on frontend, get this exception
-      result = "日期格式错误";
+      message = "日期格式错误";
     } else {
-      result = "操作错误！请联系系统管理员！";
+      message = "操作错误！请联系系统管理员！";
     }
-    return JsonResult.newJson(0, result);
+    return JsonResult.newJson(0, message);
   }
 }

@@ -106,7 +106,7 @@
     $.post(`get_student_by_id.do?stuId=${getQueryStringParameters().stuId}`, response => {
       const notice = $("#form_notice");
       if (response.code === 1) {
-        const data = response.result;
+        const data = response.data;
         $('#stuId').val(data.stuId);
         $('#stuName').val(data.stuName);
         $('#profession').val(data.profession);
@@ -116,7 +116,7 @@
         $('#totalScore').val(data.totalScore);
         $('#note').val(data.note);
       } else if (notice) {
-        notice.html(data.result);
+        notice.html(data.message);
       }
     })
   });

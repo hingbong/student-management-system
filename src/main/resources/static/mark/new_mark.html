@@ -70,12 +70,12 @@
   $.post('/student/list_all.do', res => {
     const notice = $("#form_notice");
     if (res.code === 1) {
-      res.result.forEach(e => {
+      res.data.forEach(e => {
         let option = $(`<option value="${e.stuId}">${e.stuName}</option>`);
         $('#stuId').append(option);
       });
     } else if (notice) {
-      notice.html(data.result);
+      notice.html(data.message);
     }
   });
 </script>
