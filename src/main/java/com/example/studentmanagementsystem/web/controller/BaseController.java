@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -39,6 +40,9 @@ public abstract class BaseController {
       result = "操作错误！尝试使用的对象为Null！";
     } else if (e instanceof OperationException) {
       result = e.getMessage();
+    } else if (e instanceof BindException) {
+      // if didn't select date on frontend, get this exception
+      result = "日期格式错误";
     } else {
       result = "操作错误！请联系系统管理员！";
     }
