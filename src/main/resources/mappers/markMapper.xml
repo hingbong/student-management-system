@@ -44,7 +44,7 @@
 
   <delete id="deleteMarkById">
     DELETE
-    FROM stu_mark_info
+    FROM Stu_mark_info
     WHERE markid = #{markid}
   </delete>
 </mapper>
