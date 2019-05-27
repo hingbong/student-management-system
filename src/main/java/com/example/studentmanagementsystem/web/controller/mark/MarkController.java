@@ -25,7 +25,6 @@ public class MarkController extends BaseController {
   @PostMapping("/add_mark.do")
   @ResponseStatus(HttpStatus.CREATED)
   public JsonResult<Void> addNewMark(Mark mark) {
-    System.out.println(mark);
     markService.addNewMark(mark);
     return JsonResult.newJson(1);
   }
