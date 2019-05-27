@@ -1,9 +1,6 @@
-const professionArr = ['', '计算机控制', '网络安全', '计算机应用'];
 const sexArr = ['男', '女'];
 
 const confirm_delete = id => {
-  // resume_remove.php?id=
-  // alert( id );
   if (confirm("确定要删除么？")) {
     $.ajax({
       url: 'delete_by_id.do?id=' + id,
@@ -26,7 +23,6 @@ const send_form = form => {
 };
 
 const getQueryStringParameters = () => {
-  let url = window.location.href;
   let query = window.location.search.substring(1);
   return (/^[?#]/.test(query) ? query.slice(1) : query)
   .split('&')
