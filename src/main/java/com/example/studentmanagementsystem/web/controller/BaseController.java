@@ -19,7 +19,7 @@ public abstract class BaseController {
   }
 
   @ExceptionHandler
-  @ResponseStatus(HttpStatus.OK)
+  @ResponseStatus(HttpStatus.ACCEPTED)
   public JsonResult<String> handleException(final Throwable e) {
     String result;
     System.err.println(LocalDateTime.now() + "=>" + e.getMessage());
