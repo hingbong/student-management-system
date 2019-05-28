@@ -2,28 +2,14 @@ package com.example.studentmanagementsystem.web.controller;
 
 import com.example.studentmanagementsystem.exception.OperationException;
 import com.example.studentmanagementsystem.util.JsonResult;
-import java.io.IOException;
 import java.time.LocalDateTime;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /** @author Hingbong */
 public abstract class BaseController {
-
-  /**
-   * when visit a root directory, redirect it to index.html
-   *
-   * @param response http response
-   * @throws IOException IOException
-   */
-  @RequestMapping
-  public void gotoIndex(HttpServletResponse response) throws IOException {
-    response.sendRedirect("index.html");
-  }
 
   /**
    * handel the Throwable

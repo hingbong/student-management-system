@@ -1,25 +1,43 @@
 const sexArr = ['男', '女'];
 
-const confirm_delete = id => {
+const confirm_delete = url => {
   if (confirm("确定要删除么？")) {
-    $.ajax({
-      url: 'delete_by_id.do?id=' + id,
-      type: 'DELETE',
-      success: () => window.location.reload()
-    });
+    fetch(url, {
+      method: 'delete'
+    }).then(response => response.json().then(json => {
+      if (json.code === 1) {
+        window.location.reload();
+      } else {
+        alert(json.message);
+      }
+    }))
   }
 };
 
+const search = form => {
+  const body = new URLSearchParams();
+  Array.from(form).forEach(e => body.append(e.name, e.value));
+  fetch(`${form.action}?${body}`, {
+    method: 'get'
+  }).then(
+      response => response.json().then(json => putData(json)))
+};
+
 const send_form = form => {
-  $.post($(form).attr("action"), $(form).serialize(), data => {
-    const notice = $("#form_notice");
-    if (data.code === 1) {
-      notice ? notice.html('成功') : '';
+  const body = new URLSearchParams();
+  Array.from(form).forEach(e => body.append(e.name, e.value));
+  fetch(form.action, {
+    method: 'post',
+    body: body
+  }).then(response => response.json().then(json => {
+    const notice = document.querySelector('#form_notice');
+    if (json.code === 1) {
+      notice ? notice.innerText = '成功' : '';
       window.location.replace('index.html');
     } else if (notice) {
-      notice.html(data.message);
+      notice.innerText = json.message;
     }
-  });
+  }));
 };
 
 const getQueryStringParameters = () => {

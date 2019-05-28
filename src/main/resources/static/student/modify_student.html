@@ -102,24 +102,26 @@
 <script src="/js/bootstrap.js"></script>
 <script src="/js/main.js"></script>
 <script>
-  $(() => {
-    $.post(`get_student_by_id.do?stuId=${getQueryStringParameters().stuId}`, response => {
-      const notice = $("#form_notice");
-      if (response.code === 1) {
-        const data = response.data;
-        $('#stuId').val(data.stuId);
-        $('#stuName').val(data.stuName);
-        $('#profession').val(data.profession);
+  onload = () => {
+    fetch(`/student_op/${getQueryStringParameters().stuId}`, {
+      method: 'get'
+    }).then(response => response.json().then(json => {
+      const notice = document.querySelector('#form_notice');
+      if (json.code === 1) {
+        const data = json.data;
+        document.querySelector('#stuId').value = data.stuId;
+        document.querySelector('#stuName').value = data.stuName;
+        document.querySelector('#profession').value = data.profession;
         document.querySelector('#date').valueAsDate = new Date(data.date);
-        $('input:radio[name=sex]')[data.sex].checked = true;
-        $('#idNum').val(data.idNum);
-        $('#totalScore').val(data.totalScore);
-        $('#note').val(data.note);
+        document.querySelectorAll('.form-check-input')[data.sex].checked = true;
+        document.querySelector('#idNum').value = data.idNum;
+        document.querySelector('#totalScore').value = data.totalScore;
+        document.querySelector('#note').value = data.note;
       } else if (notice) {
-        notice.html(data.message);
+        notice.innerHTML = data.message;
       }
-    })
-  });
+    }));
+  };
 </script>
 </body>
 </html>
