@@ -6,9 +6,7 @@ import com.example.studentmanagementsystem.exception.OperationException;
 import com.example.studentmanagementsystem.mappers.MarkMapper;
 import com.example.studentmanagementsystem.mappers.StudentMapper;
 import com.example.studentmanagementsystem.services.MarkService;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +29,7 @@ public class MarkServiceImpl implements MarkService {
       throw new OperationException("学号错误");
     }
     // add date is now
-    mark.setAddDate(new Date());
+    mark.setAddDate(LocalDateTime.now());
     // calculate the final score
     mark.setFinalScore(mark.getBaseScore() * 0.4 + mark.getTestScore() * 0.6);
     Integer newMark = markMapper.addNewMark(mark);
@@ -53,13 +51,7 @@ public class MarkServiceImpl implements MarkService {
     if ("".equals(stuName)) {
       stuName = null;
     }
-    String afterDay = null;
-    if (addDate != null) {
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-      LocalDate parse = LocalDate.parse(addDate, formatter);
-      afterDay = parse.plusDays(1).format(formatter);
-    }
-    return markMapper.findAll(addDate, afterDay, stuName);
+    return markMapper.findAll(addDate, stuName);
   }
 
   @Override

@@ -2,12 +2,11 @@ package com.example.studentmanagementsystem.mappers;
 
 import com.example.studentmanagementsystem.entity.Student;
 import java.util.List;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /** @author Hingbong */
-@Mapper
+
 @Repository
 public interface StudentMapper {
 

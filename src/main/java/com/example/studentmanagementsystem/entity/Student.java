@@ -1,7 +1,8 @@
 package com.example.studentmanagementsystem.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * stuId
@@ -27,7 +28,10 @@ public class Student implements Serializable {
   private Integer stuId;
   private String stuName;
   private Integer profession;
-  private Date date;
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate date;
+
   private Integer sex;
   private String idNum;
   private Double totalScore;
@@ -39,7 +43,7 @@ public class Student implements Serializable {
       Integer stuId,
       String stuName,
       Integer profession,
-      Date date,
+      LocalDate date,
       Integer sex,
       String idNum,
       Double totalScore) {
@@ -53,7 +57,12 @@ public class Student implements Serializable {
   }
 
   public Student(
-      String stuName, Integer profession, Date date, Integer sex, String idNum, Double totalScore) {
+      String stuName,
+      Integer profession,
+      LocalDate date,
+      Integer sex,
+      String idNum,
+      Double totalScore) {
     this.stuName = stuName;
     this.profession = profession;
     this.date = date;
@@ -65,7 +74,7 @@ public class Student implements Serializable {
   public Student(
       String stuName,
       Integer profession,
-      Date date,
+      LocalDate date,
       Integer sex,
       String idNum,
       Double totalScore,
@@ -83,7 +92,7 @@ public class Student implements Serializable {
       Integer stuId,
       String stuName,
       Integer profession,
-      Date date,
+      LocalDate date,
       Integer sex,
       String idNum,
       Double totalScore,
@@ -122,11 +131,11 @@ public class Student implements Serializable {
     this.profession = profession;
   }
 
-  public Date getDate() {
+  public LocalDate getDate() {
     return date;
   }
 
-  public void setDate(Date date) {
+  public void setDate(LocalDate date) {
     this.date = date;
   }
 
