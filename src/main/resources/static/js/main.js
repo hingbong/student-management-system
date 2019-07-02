@@ -40,6 +40,23 @@ const send_form = form => {
   }));
 };
 
+const modify = form => {
+  const body = new URLSearchParams();
+  Array.from(form).forEach(e => body.append(e.name, e.value));
+  fetch(form.action, {
+    method: 'put',
+    body: body
+  }).then(response => response.json().then(json => {
+    const notice = document.querySelector('#form_notice');
+    if (json.code === 1) {
+      notice ? notice.innerText = '成功' : '';
+      window.location.replace('index.html');
+    } else if (notice) {
+      notice.innerText = json.message;
+    }
+  }));
+};
+
 const getQueryStringParameters = () => {
   let query = window.location.search.substring(1);
   return (/^[?#]/.test(query) ? query.slice(1) : query)
