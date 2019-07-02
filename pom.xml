@@ -44,9 +44,9 @@
       <version>3.3.1</version>
     </dependency>
     <dependency>
-      <artifactId>mariadb-java-client</artifactId>
-      <groupId>org.mariadb.jdbc</groupId>
-      <version>2.4.1</version>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
   <description>student management system</description>
@@ -58,7 +58,7 @@
     <artifactId>spring-boot-starter-parent</artifactId>
     <groupId>org.springframework.boot</groupId>
     <relativePath/>
-    <version>2.2.0.M3</version> <!-- lookup parent from repository -->
+    <version>2.2.0.M4</version> <!-- lookup parent from repository -->
   </parent>
 
   <pluginRepositories>
@@ -95,6 +95,7 @@
       <name>Spring Milestones</name>
       <url>https://repo.spring.io/milestone</url>
     </repository>
+
   </repositories>
   <version>0.0.1-SNAPSHOT</version>
 
