@@ -23,6 +23,7 @@ interface MarkService {
      */
     fun findAllMarkAndStuName(addDate: String?, stuName: String?): List<MarkVO>
 
+    fun findMarkByStuId(stuId: Int): List<Mark>
     /**
      * delete mark
      *

@@ -18,9 +18,10 @@ abstract class BaseController {
      * @param e Throwable
      * @return something that error and told to the frontend
      */
-    @ExceptionHandler
+    @ExceptionHandler(OperationException::class)
     @ResponseStatus(HttpStatus.ACCEPTED)
     fun handleException(e: Throwable): JsonResult<Void> {
+        e.printStackTrace()
         val message: String = when (e) {
             is NullPointerException -> "操作错误！尝试使用的对象为Null！"
             is OperationException -> e.message.toString()

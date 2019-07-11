@@ -8,16 +8,20 @@ import com.example.studentmanagementsystem.mappers.StudentMapper
 import com.example.studentmanagementsystem.services.MarkService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
+import kotlin.math.roundToInt
 
 /** @author Hingbong
  */
 @Service
 class MarkServiceImpl : MarkService {
 
+
     private var markMapper: MarkMapper? = null
     private var studentMapper: StudentMapper? = null
 
+    @Transactional(rollbackFor = arrayOf(Exception::class))
     override fun addNewMark(mark: Mark) {
         if (!validMark(mark)) {
             throw OperationException("输入信息有误")
@@ -35,7 +39,7 @@ class MarkServiceImpl : MarkService {
         // get the sum of final score
         val totalFinalScoreById = markMapper!!.getTotalFinalScoreById(mark.stuId!!)
         // total score = sum of final score * 10%
-        val totalScore = Math.round(totalFinalScoreById!! * 0.1).toInt()
+        val totalScore = (totalFinalScoreById!! * 0.1).roundToInt()
         studentMapper!!.setTotalScoreById(mark.stuId!!, totalScore)
         if (newMark <= 0) {
             throw OperationException("添加失败")
@@ -52,6 +56,10 @@ class MarkServiceImpl : MarkService {
             stuName = null
         }
         return markMapper!!.findAll(addDate, stuName)
+    }
+
+    override fun findMarkByStuId(stuId: Int): List<Mark> {
+        return markMapper!!.findByStuId(stuId)
     }
 
     override fun deleteMark(markId: Int?) {

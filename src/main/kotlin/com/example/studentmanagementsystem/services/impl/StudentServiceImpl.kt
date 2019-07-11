@@ -3,10 +3,12 @@ package com.example.studentmanagementsystem.services.impl
 import com.example.studentmanagementsystem.entity.Student
 import com.example.studentmanagementsystem.exception.OperationException
 import com.example.studentmanagementsystem.mappers.StudentMapper
+import com.example.studentmanagementsystem.services.MarkService
 import com.example.studentmanagementsystem.services.StudentService
 import com.example.studentmanagementsystem.util.Util
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 /** @author Hingbong
  */
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service
 class StudentServiceImpl : StudentService {
 
     private var studentMapper: StudentMapper? = null
+    private var markService: MarkService? = null
 
     override fun addNewStudent(student: Student) {
         if (!validStudent(student)) {
@@ -45,10 +48,13 @@ class StudentServiceImpl : StudentService {
         return studentMapper!!.findAllStudent(stuName, profession)
     }
 
+    @Transactional(rollbackFor = arrayOf(Exception::class))
     override fun deleteStudentById(stuId: Int?) {
         if (stuId == null) {
             throw OperationException("操作错误")
         }
+        val marks = markService!!.findMarkByStuId(stuId)
+        marks.parallelStream().forEach { e -> markService!!.deleteMark(e.markId) }
         val integer = studentMapper!!.deleteStudentById(stuId)
         if (integer <= 0) {
             throw OperationException("操作错误")
@@ -90,5 +96,10 @@ class StudentServiceImpl : StudentService {
     @Autowired
     fun setStudentMapper(studentMapper: StudentMapper) {
         this.studentMapper = studentMapper
+    }
+
+    @Autowired
+    fun setMarkService(markService: MarkService) {
+        this.markService = markService
     }
 }

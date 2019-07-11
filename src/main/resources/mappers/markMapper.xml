@@ -42,6 +42,19 @@
     </if>
   </select>
 
+  <select id="findByStuId" resultType="com.example.studentmanagementsystem.entity.Mark">
+    SELECT markid,
+           stuId,
+           course_name,
+           base_score,
+           test_score,
+           final_score,
+           add_date,
+           note
+    FROM stu_mark_info
+    WHERE stuId = #{stuId}
+  </select>
+
   <delete id="deleteMarkById">
     DELETE
     FROM Stu_mark_info

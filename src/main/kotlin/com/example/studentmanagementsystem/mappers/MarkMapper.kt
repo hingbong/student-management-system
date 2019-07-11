@@ -31,11 +31,11 @@ interface MarkMapper {
      *
      * @param addDate the date of adding to the table
      * @param stuName student name
-     * @param afterDay the day after add date
      * @return the result
      */
     fun findAll(@Param("addDate") addDate: String?, @Param("stuName") stuName: String?): List<MarkVO>
 
+    fun findByStuId(stuId: Int): List<Mark>
     /**
      * delete a mark by id
      *
