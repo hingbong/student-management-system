@@ -46,7 +46,7 @@
       <groupId>org.jetbrains.kotlin</groupId>
     </dependency>
     <dependency>
-      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <artifactId>kotlin-stdlib</artifactId>
       <groupId>org.jetbrains.kotlin</groupId>
     </dependency>
     <dependency>
@@ -105,8 +105,8 @@
   </pluginRepositories>
 
   <properties>
-    <java.version>1.8</java.version>
-    <kotlin.version>1.3.31</kotlin.version>
+    <java.version>12</java.version>
+    <kotlin.version>1.3.41</kotlin.version>
   </properties>
 
   <repositories>
