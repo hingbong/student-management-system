@@ -47,15 +47,15 @@ class MarkServiceImpl : MarkService {
     }
 
     override fun findAllMarkAndStuName(addDate: String?, stuName: String?): List<MarkVO> {
-        var addDate: String? = addDate
-        var stuName: String? = stuName
-        if ("" == addDate) {
-            addDate = null
+        var addDate1: String? = addDate
+        var stuName1: String? = stuName
+        if ("" == addDate1) {
+            addDate1 = null
         }
-        if ("" == stuName) {
-            stuName = null
+        if ("" == stuName1) {
+            stuName1 = null
         }
-        return markMapper!!.findAll(addDate, stuName)
+        return markMapper!!.findAll(addDate1, stuName1)
     }
 
     override fun findMarkByStuId(stuId: Int): List<Mark> {

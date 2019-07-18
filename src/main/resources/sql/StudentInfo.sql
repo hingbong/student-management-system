@@ -8,4 +8,5 @@ CREATE TABLE IF NOT EXISTS student_Info
     id_num      NVARCHAR(20)                   NOT NULL COMMENT '根据总成绩的 10%计算',
     total_score INT                            NOT NULL,
     note        NVARCHAR(100)
-);
+) ENGINE INNODB
+  CHARACTER SET utf8mb4;
